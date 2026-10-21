@@ -2242,4 +2242,6 @@ export default {
   'Your sports watch, calling you back.': 'Spor saatin seni geri çağırıyor.',
   'Coach wants you back on the bar.': 'Koç seni bara geri bekliyor.',
   'Gentle, for headphones or a quiet room.': 'Sakin, kulaklık ya da sessiz bir oda için.',
+  'Dynamic': 'Dinamik',
+  'Red to green as you get through today’s sets, blue on a rest day.': 'Bugünün setlerini tamamladıkça kırmızıdan yeşile, dinlenme gününde mavi.',
 }

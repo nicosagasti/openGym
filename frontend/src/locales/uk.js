@@ -2239,4 +2239,6 @@ export default {
   'Your sports watch, calling you back.': 'Ваш спортивний годинник кличе вас назад.',
   'Coach wants you back on the bar.': 'Тренер чекає вас назад біля штанги.',
   'Gentle, for headphones or a quiet room.': 'Тихий, для навушників або спокійної кімнати.',
+  'Dynamic': 'Динамічний',
+  'Red to green as you get through today’s sets, blue on a rest day.': 'Від червоного до зеленого в міру виконання сьогоднішніх підходів, синій у день відпочинку.',
 }

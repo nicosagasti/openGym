@@ -2242,4 +2242,6 @@ export default {
   'Your sports watch, calling you back.': 'Il tuo orologio sportivo ti richiama.',
   'Coach wants you back on the bar.': 'Il coach ti vuole di nuovo al bilanciere.',
   'Gentle, for headphones or a quiet room.': 'Delicato, per le cuffie o una stanza silenziosa.',
+  'Dynamic': 'Dinamico',
+  'Red to green as you get through today’s sets, blue on a rest day.': 'Dal rosso al verde man mano che completi le serie di oggi, blu nei giorni di riposo.',
 }

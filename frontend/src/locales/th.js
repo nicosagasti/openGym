@@ -2253,4 +2253,6 @@ export default {
   'Your sports watch, calling you back.': 'นาฬิกาสปอร์ตเรียกคุณกลับมาแล้ว',
   'Coach wants you back on the bar.': 'โค้ชอยากให้คุณกลับมาที่บาร์',
   'Gentle, for headphones or a quiet room.': 'เบา ๆ สำหรับหูฟังหรือห้องที่เงียบ',
+  'Dynamic': 'ไดนามิก',
+  'Red to green as you get through today’s sets, blue on a rest day.': 'จากแดงเป็นเขียวเมื่อคุณทำเซ็ตของวันนี้ไปเรื่อย ๆ และเป็นสีฟ้าในวันพัก',
 }

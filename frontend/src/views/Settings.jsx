@@ -30,7 +30,8 @@ import { syncMedia, fetchToStore } from '../lib/media-sync.js'
 import { getMediaStatus, subscribeMediaStatus, pendingRefCount } from '../lib/media-owed.js'
 import { limitsFrom, fmtMB, MB } from '../lib/media-limits.js'
 import { setRestAccent } from '../lib/rest-alert.js'
-import { CUSTOM, accentKey, adjustedIn, applyAccent, cleanHex, inkOn, isGrey } from '../lib/accent.js'
+import { CUSTOM, DYNAMIC, accentKey, adjustedIn, applyAccent, cleanHex, inkOn, isGrey } from '../lib/accent.js'
+import { liveAccentValue } from '../lib/dynamic-accent.js'
 import { checkForUpdate, downloadAndInstall, fetchChecksum, RELEASES_PAGE } from '../lib/update.js'
 import { forgetCoach } from '../lib/coach-api.js'
 import { REST_MAX, REST_PAUSE_MIN, REST_PAUSE_MAX, fmtRest, fmtDuration } from '../lib/duration.js'
@@ -1192,6 +1193,7 @@ function PushCard({ S, update, toast }) {
 // What the chosen accent is called: a preset's colour name, or the user's own.
 function accentLabel(S) {
   const k = accentKey(S)
+  if (k === DYNAMIC) return t('Dynamic')
   return k === CUSTOM ? t('Your own color') : t(ACCENT_NAMES[k] || 'Green')
 }
 
@@ -1212,6 +1214,7 @@ function AccentSwatches({ S, update }) {
   const own = cleanHex(S.accentCustom)
   const onCustom = key === CUSTOM
   const pickPreset = k => { update(s => { s.accent = k }); setRestAccent(k) }
+  const pickDynamic = () => { update(s => { s.accent = DYNAMIC }); setRestAccent(liveAccentValue({ ...S, accent: DYNAMIC })) }
   const pickOwn = hex => {
     const c = cleanHex(hex)
     if (!c || (onCustom && c === own)) return
@@ -1267,6 +1270,8 @@ function AccentSwatches({ S, update }) {
         <button key={k} className={'swatch' + (key === k ? ' on' : '')}
           style={{ background: c }} onClick={() => pickPreset(k)} aria-label={t(ACCENT_NAMES[k] || k)} />
       ))}
+      <button className={'swatch swatch-dynamic' + (key === DYNAMIC ? ' on' : '')}
+        onClick={pickDynamic} aria-label={t('Dynamic')} />
       {!hasInput
         ? <button className="swatch swatch-own" style={{ background: own }} onClick={() => pickOwn(own)} aria-label={ownLabel} />
         : <span className={'swatch swatch-own' + (own ? ' on' : ' unset')} style={own ? { background: own, color: inkOn(own) } : undefined}>
@@ -1276,6 +1281,7 @@ function AccentSwatches({ S, update }) {
             aria-label={own ? t('Change your own color') : t('Pick your own color')} />
         </span>}
     </div>
+    {key === DYNAMIC && <span className="lrow-s swatch-note" style={{ flexBasis: '100%', paddingInlineStart: 41 }}>{t('Red to green as you get through today’s sets, blue on a rest day.')}</span>}
     {notes.map(n => <span key={n} className="lrow-s swatch-note" style={{ flexBasis: '100%', paddingInlineStart: 41 }}>{n}</span>)}
   </>
 }

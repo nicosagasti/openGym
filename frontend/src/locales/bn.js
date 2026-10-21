@@ -2321,4 +2321,6 @@ export default {
   'Your sports watch, calling you back.': 'আপনার স্পোর্টস ঘড়ি আপনাকে ফিরে ডাকছে।',
   'Coach wants you back on the bar.': 'কোচ আপনাকে আবার বারে চান।',
   'Gentle, for headphones or a quiet room.': 'মৃদু, হেডফোন বা শান্ত ঘরের জন্য।',
+  'Dynamic': 'ডায়নামিক',
+  'Red to green as you get through today’s sets, blue on a rest day.': 'আজকের সেটগুলো শেষ করার সাথে সাথে লাল থেকে সবুজ, বিশ্রামের দিনে নীল।',
 }

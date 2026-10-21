@@ -18,6 +18,11 @@ import { ACCENTS, ACCENT_INK } from './format.js'
 
 export const DEFAULT_ACCENT = 'lime'
 export const CUSTOM = 'custom'
+// Red to green over today's sets, blue on a rest day. Its colour of the moment needs the day's
+// plan and session, so it is worked out in lib/dynamic-accent.js (liveAccentValue), which keeps
+// this file free of them; here it is a key like any other. An app from before this draws its
+// default green, as for any key it does not know.
+export const DYNAMIC = 'dynamic'
 
 const HEX = /^#[0-9a-f]{6}$/i
 // What a stored `accent` may be at all: a short lowercase word. One this version does not know
@@ -48,12 +53,14 @@ export function accentKey(S) {
   const k = S?.accent
   if (typeof k === 'string' && Object.hasOwn(ACCENTS, k)) return k
   if (k === CUSTOM && cleanHex(S?.accentCustom)) return CUSTOM
+  if (k === DYNAMIC) return DYNAMIC
   return DEFAULT_ACCENT
 }
 
 /**
  * The value the rest of the app passes around (the rest alert, the native countdown): a preset
- * key, or the user's colour itself as '#rrggbb'.
+ * key, or the user's colour itself as '#rrggbb'. The dynamic choice comes back as its key;
+ * lib/dynamic-accent.js liveAccentValue turns it into today's colour.
  */
 export function accentValue(S) {
   const k = accentKey(S)

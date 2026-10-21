@@ -2242,4 +2242,6 @@ export default {
   'Your sports watch, calling you back.': '你的运动手表在叫你回来。',
   'Coach wants you back on the bar.': '教练等你回到杠铃前。',
   'Gentle, for headphones or a quiet room.': '轻柔，适合耳机或安静的房间。',
+  'Dynamic': '动态',
+  'Red to green as you get through today’s sets, blue on a rest day.': '随着完成今天的组数由红变绿，休息日为蓝色。',
 }

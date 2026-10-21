@@ -1403,6 +1403,8 @@ export const PT_BR_OVERRIDES = {
   'Gentle, for headphones or a quiet room.': 'Suave, para fones de ouvido ou um lugar silencioso.',
   'Fewer than two workouts in this period. Pick a longer one.': 'Menos de dois treinos neste período. Escolha um mais longo.',
   'Releases are checked on GitHub. The download is verified against its checksum before the installer opens.': 'As versões são verificadas no GitHub. O download é conferido pela soma de verificação antes de abrir o instalador.',
+  'Dynamic': 'Dinâmico',
+  'Red to green as you get through today’s sets, blue on a rest day.': 'Do vermelho ao verde conforme você completa as séries de hoje, azul em dia de descanso.',
 }
 
 export default { ...pt, ...PT_BR_OVERRIDES }
