@@ -14,5 +14,7 @@ Ideas y pendientes para este fork de openGym.
 - [ ] Proponer el arreglo de rendimiento al proyecto original.
 
 ## Arreglos técnicos
+- [ ] `src/lib/rest-alert.native.test.js` falla a veces por tiempo de espera al correr toda la
+      suite (también en el código original).
 - [ ] Dos tests fallan en Windows también sin cambios: `src/sheets.day-note.test.jsx` y
       `scripts/check-mobile-bundle.test.mjs`.
