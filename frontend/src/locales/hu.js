@@ -2247,4 +2247,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'Halk, fülhallgatóhoz vagy csendes helyre.',
   'Dynamic': 'Dinamikus',
   'Red to green as you get through today’s sets, blue on a rest day.': 'Pirosból zöldbe, ahogy haladsz a mai sorozatokkal, pihenőnapon kék.',
+  'New order': 'Új sorrend',
+  'Supersets changed': 'Megváltoztak a szuperszettek',
+  'Saved as “{0}”': 'Mentve: „{0}”',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'A mai edzés eltért ettől a rutintól. Megtartod a változtatásokat legközelebbre?',
+  'Save as new routine': 'Mentés új rutinként',
+  'Keep as is': 'Maradjon így',
+  'Ask to update the routine': 'Kérdezzen rá a rutin frissítésére',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Ha olyan edzést fejezel be, amelynek gyakorlatai, sorrendje vagy szuperszettjei eltérnek a rutinjától.',
 }

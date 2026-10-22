@@ -2323,4 +2323,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'মৃদু, হেডফোন বা শান্ত ঘরের জন্য।',
   'Dynamic': 'ডায়নামিক',
   'Red to green as you get through today’s sets, blue on a rest day.': 'আজকের সেটগুলো শেষ করার সাথে সাথে লাল থেকে সবুজ, বিশ্রামের দিনে নীল।',
+  'New order': 'নতুন ক্রম',
+  'Supersets changed': 'সুপারসেট বদলেছে',
+  'Saved as “{0}”': '“{0}” নামে সেভ হয়েছে',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'আজকের ওয়ার্কআউট এই রুটিন থেকে আলাদা ছিল। পরের বারের জন্য পরিবর্তনগুলো রাখবেন?',
+  'Save as new routine': 'নতুন রুটিন হিসেবে সেভ করুন',
+  'Keep as is': 'যেমন আছে রাখুন',
+  'Ask to update the routine': 'রুটিন আপডেটের কথা জিজ্ঞাসা করুন',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'যখন এমন ওয়ার্কআউট শেষ করেন যার ব্যায়াম, ক্রম বা সুপারসেট তার রুটিন থেকে আলাদা।',
 }

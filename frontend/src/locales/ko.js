@@ -2244,4 +2244,12 @@ export default {
   'Gentle, for headphones or a quiet room.': '이어폰이나 조용한 곳에 어울려요.',
   'Dynamic': '다이내믹',
   'Red to green as you get through today’s sets, blue on a rest day.': '오늘의 세트를 진행할수록 빨강에서 초록으로, 휴식일에는 파랑.',
+  'New order': '새 순서',
+  'Supersets changed': '슈퍼세트 변경됨',
+  'Saved as “{0}”': '“{0}”(으)로 저장됨',
+  'Today’s workout was different from this routine. Keep the changes for next time?': '오늘 운동이 이 루틴과 달랐어요. 다음에도 변경 사항을 유지할까요?',
+  'Save as new routine': '새 루틴으로 저장',
+  'Keep as is': '그대로 두기',
+  'Ask to update the routine': '루틴 업데이트 여부 묻기',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': '운동의 종목, 순서 또는 슈퍼세트가 루틴과 다를 때 운동을 마치면.',
 }

@@ -2248,4 +2248,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'Тихий, для наушников или спокойного зала.',
   'Dynamic': 'Динамический',
   'Red to green as you get through today’s sets, blue on a rest day.': 'От красного к зелёному по мере выполнения сегодняшних подходов, синий в день отдыха.',
+  'New order': 'Новый порядок',
+  'Supersets changed': 'Суперсеты изменены',
+  'Saved as “{0}”': 'Сохранено как «{0}»',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'Сегодняшняя тренировка отличалась от этой программы. Сохранить изменения на следующий раз?',
+  'Save as new routine': 'Сохранить как новую программу',
+  'Keep as is': 'Оставить как есть',
+  'Ask to update the routine': 'Спрашивать об обновлении программы',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Когда вы завершаете тренировку, упражнения, порядок или суперсеты которой отличаются от программы.',
 }

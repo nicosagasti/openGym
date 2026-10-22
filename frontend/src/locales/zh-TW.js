@@ -2237,4 +2237,12 @@ export default {
   'Gentle, for headphones or a quiet room.': '輕柔，適合耳機或安靜的房間。',
   'Dynamic': '動態',
   'Red to green as you get through today’s sets, blue on a rest day.': '隨著完成今天的組數由紅轉綠，休息日為藍色。',
+  'New order': '新順序',
+  'Supersets changed': '超級組已變更',
+  'Saved as “{0}”': '已儲存為「{0}」',
+  'Today’s workout was different from this routine. Keep the changes for next time?': '今天的訓練與此課表不同。要保留變更供下次使用嗎？',
+  'Save as new routine': '儲存為新課表',
+  'Keep as is': '保持原樣',
+  'Ask to update the routine': '詢問是否更新課表',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': '當你完成的訓練在動作、順序或超級組上與課表不同時。',
 }

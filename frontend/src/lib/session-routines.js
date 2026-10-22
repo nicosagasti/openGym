@@ -6,7 +6,7 @@ import { isSideSet, isWarmupRow } from './workout-model.js'
 // exercise setup on this explicit action; finishing a workout never calls this helper.
 const sessionEntries = session => Array.isArray(session?.entries) ? session.entries : []
 
-function groupIds(ex) {
+export function groupIds(ex) {
   const next = ex.map(entry => ({ ...entry }))
   let i = 0
   while (i < next.length) {
@@ -61,7 +61,7 @@ function perSideWeight(row) {
   return weights.length ? Math.max(...weights) : null
 }
 
-function copiedEntry(entry, source) {
+export function copiedEntry(entry, source) {
   const rows = Array.isArray(entry?.sets) ? entry.sets : []
   const work = rows.filter(row => !isWarmupRow(row))
   // A saved entry can retain planned rows after an early finish. Match history.js lastEntryFor:

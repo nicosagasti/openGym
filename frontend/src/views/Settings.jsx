@@ -536,6 +536,14 @@ export default function Settings({ page = null, find = null, via = null }) {
             <Switch aria-label={t('Keep timing after target')} checked={!!S.timedSetOvertime}
               onChange={v => update(s => { s.timedSetOvertime = v })} />
           </Row>
+          {/* Finish asks to keep a session's exercises, order and supersets in its routine
+              (lib/routine-sync.js). Absent (an older profile) reads as on; off is the old
+              behaviour, where finishing never touches a routine. */}
+          <Row icon="clipboard" iconTint="var(--blue)" title={t('Ask to update the routine')}
+            subtitle={t('When you finish a workout whose exercises, order or supersets differ from its routine.')}>
+            <Switch aria-label={t('Ask to update the routine')} checked={S.askRoutineUpdate !== false}
+              onChange={v => update(s => { s.askRoutineUpdate = v })} />
+          </Row>
         </Section>
         {/* The lean workout screen keeps the sets and one "more" button per exercise; each switch
             brings one of the old always-visible button groups back for people who liked them. */}

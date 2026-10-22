@@ -1405,6 +1405,14 @@ export const PT_BR_OVERRIDES = {
   'Releases are checked on GitHub. The download is verified against its checksum before the installer opens.': 'As versões são verificadas no GitHub. O download é conferido pela soma de verificação antes de abrir o instalador.',
   'Dynamic': 'Dinâmico',
   'Red to green as you get through today’s sets, blue on a rest day.': 'Do vermelho ao verde conforme você completa as séries de hoje, azul em dia de descanso.',
+  'New order': 'Nova ordem',
+  'Supersets changed': 'Superséries alteradas',
+  'Saved as “{0}”': 'Salva como “{0}”',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'O treino de hoje foi diferente desta rotina. Manter as mudanças para a próxima vez?',
+  'Save as new routine': 'Salvar como nova rotina',
+  'Keep as is': 'Deixar como está',
+  'Ask to update the routine': 'Perguntar se deve atualizar a rotina',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Ao terminar um treino cujos exercícios, ordem ou superséries diferem da rotina.',
 }
 
 export default { ...pt, ...PT_BR_OVERRIDES }

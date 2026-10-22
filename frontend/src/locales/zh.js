@@ -2244,4 +2244,12 @@ export default {
   'Gentle, for headphones or a quiet room.': '轻柔，适合耳机或安静的房间。',
   'Dynamic': '动态',
   'Red to green as you get through today’s sets, blue on a rest day.': '随着完成今天的组数由红变绿，休息日为蓝色。',
+  'New order': '新顺序',
+  'Supersets changed': '超级组已更改',
+  'Saved as “{0}”': '已保存为“{0}”',
+  'Today’s workout was different from this routine. Keep the changes for next time?': '今天的训练与此训练日不同。要保留更改供下次使用吗？',
+  'Save as new routine': '保存为新训练日',
+  'Keep as is': '保持不变',
+  'Ask to update the routine': '询问是否更新训练日',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': '当你完成的训练在动作、顺序或超级组上与训练日不同时。',
 }

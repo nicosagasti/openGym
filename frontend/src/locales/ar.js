@@ -2299,4 +2299,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'هادئ، للسماعات أو لغرفة هادئة.',
   'Dynamic': 'ديناميكي',
   'Red to green as you get through today’s sets, blue on a rest day.': 'من الأحمر إلى الأخضر كلما أنهيت مجموعات اليوم، وأزرق في يوم الراحة.',
+  'New order': 'ترتيب جديد',
+  'Supersets changed': 'تغيّرت المجموعات الفائقة',
+  'Saved as “{0}”': 'تم الحفظ باسم “{0}”',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'كان تمرين اليوم مختلفًا عن هذا الروتين. هل تريد الاحتفاظ بالتغييرات للمرة القادمة؟',
+  'Save as new routine': 'حفظ كروتين جديد',
+  'Keep as is': 'إبقاؤه كما هو',
+  'Ask to update the routine': 'اسأل لتحديث الروتين',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'عند إنهاء تمرين تختلف تمارينه أو ترتيبه أو مجموعاته الفائقة عن روتينه.',
 }

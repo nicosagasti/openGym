@@ -46,6 +46,7 @@ import { buildCompletedWorkout, sessionEnd } from './lib/finish-workout.js'
 import { refillAfter } from './lib/rotation.js'
 import { isWarmupRow, hasCompletedWork } from './lib/workout-model.js'
 import { saveSessionAsRoutine } from './lib/session-routines.js'
+import { sessionRoutineDiffs, applySessionToRoutine, saveSessionAsNewRoutine } from './lib/routine-sync.js'
 import { repeatSessionEntries } from './lib/session-repeat.js'
 import { swapActiveExercise } from './lib/active-exercise-swap.js'
 import { useSheetKeyboard, useRevealActiveChip, tappable } from './lib/use-sheet-keyboard.js'
@@ -3382,6 +3383,11 @@ function doFinishWorkout() {
     const rec = is1RMRecord(st, e.id, e)
     if (rec && !prs.includes(e.id)) e1prs.push({ id: e.id, ...rec })
   })
+  // What this session changed in the routines it came from (lib/routine-sync.js), read now while
+  // the session is still in hand: a live session only, and only while Settings asks for it.
+  // The entries go with it, because s.active is gone by the time an answer comes.
+  const routineDiffs = !past && st.askRoutineUpdate !== false ? sessionRoutineDiffs(st.routines, A.entries) : []
+  const routineEntries = routineDiffs.length ? structuredClone(A.entries) : null
   const w = buildCompletedWorkout(A, {
     end: past ? backfillEnd(A) : sessionEnd(A),
     prs,
@@ -3418,5 +3424,65 @@ function doFinishWorkout() {
   // into s.active, which is gone. What it held is not logged, like any set left unchecked.
   useUI.getState().stopWork()
   beep(snd(), 880, 0.15); beep(snd(), 1100, 0.15, 0.18); beep(snd(), 1320, 0.3, 0.36)
-  ui().openSheet(close => <FinishSummary w={shown} prs={prs} e1prs={e1prs} close={close} />, { kind: 'center', locked: true })
+  // The workout is saved. Each routine the session changed asks in turn, then the summary shows.
+  const summary = () => ui().openSheet(close => <FinishSummary w={shown} prs={prs} e1prs={e1prs} close={close} />, { kind: 'center', locked: true })
+  const ask = k => k < routineDiffs.length ? routineUpdateSheet(routineDiffs[k], routineEntries, () => ask(k + 1)) : summary()
+  ask(0)
+}
+
+/* ============================ update the routine after a session ============================ */
+// One line per change, in the words the session would use: + added, − left out, A → B swapped,
+// the order and the supersets, and the warm-ups, rest and note per exercise as the ⋯ menu's
+// Update routine words them. A line is a list of parts; an exercise name is a part of its own,
+// so it gets the casing class its language pack asks for (exerciseNameClass).
+const exPart = id => ({ text: EXIDX[id] ? exerciseNameFor(EXIDX[id]) : id, cls: exerciseNameClass(EXIDX[id]) })
+function routineChangeLines(d, restSec) {
+  const restWord = v => (Number(v) > 0 ? fmtRest(v) : t('Default ({0})', fmtRest(restSec)))
+  return [
+    ...d.add.map(id => ({ icon: 'plus', parts: [exPart(id)] })),
+    ...d.remove.map(id => ({ icon: 'minus', parts: [exPart(id)] })),
+    ...d.swap.map(s => ({ icon: 'swap', parts: [exPart(s.from), { text: ' → ' }, exPart(s.to)] })),
+    d.order && { icon: 'chevronsUpDown', parts: [{ text: t('New order') }] },
+    d.supersets && { icon: 'link', parts: [{ text: t('Supersets changed') }] },
+    ...d.setup.map(s => ({
+      icon: 'slider',
+      parts: [exPart(s.id), { text: ': ' + s.changes.map(c => c.key === 'note' ? t('Note')
+        : c.key === 'warmupSets' ? t('Warm-up sets') + ' ' + c.from + ' → ' + c.to
+        : t('Rest') + ' ' + restWord(c.from) + ' → ' + restWord(c.to)).join(' · ') }],
+    })),
+  ].filter(Boolean)
+}
+function RoutineUpdateDialog({ diff, entries, close, next }) {
+  const restSec = useStore(s => s.S.restSec)
+  const lines = routineChangeLines(diff, restSec)
+  const done = msg => { close(); if (msg) toast(msg); next() }
+  const updateIt = () => {
+    let ok = false
+    update(s => { ok = applySessionToRoutine(s, diff.routineId, entries) })
+    done(ok ? t('Routine updated') : null)
+  }
+  const saveNew = () => {
+    let id = null
+    update(s => { id = saveSessionAsNewRoutine(s, diff.routineId, entries, t('Copy')) })
+    const made = id && S().routines.find(r => r.id === id)
+    done(made ? t('Saved as “{0}”', made.name) : null)
+  }
+  return <div style={{ textAlign: 'center', padding: '4px 0' }}>
+    <h3 style={{ marginBottom: 8 }}>{t('Update “{0}”?', diff.name)}</h3>
+    <div className="muted" style={{ marginBottom: 12, lineHeight: 1.5 }}>{t('Today’s workout was different from this routine. Keep the changes for next time?')}</div>
+    <div className="list" style={{ textAlign: 'start', marginBottom: 18 }}>
+      {lines.map((l, i) => <div key={i} className="item">
+        <span className="lrow-i"><Icon name={l.icon} /></span>
+        <div className="grow small">{l.parts.map((part, k) => <span key={k} className={part.cls || undefined}>{part.text}</span>)}</div>
+      </div>)}
+    </div>
+    <button className="btn primary" onClick={updateIt}>{t('Update routine')}</button>
+    <div style={{ height: 8 }} />
+    <Button onClick={saveNew}>{t('Save as new routine')}</Button>
+    <div style={{ height: 8 }} />
+    <Button variant="ghost" className="dim" onClick={() => done(null)}>{t('Keep as is')}</Button>
+  </div>
+}
+function routineUpdateSheet(diff, entries, next) {
+  ui().openSheet(close => <RoutineUpdateDialog diff={diff} entries={entries} close={close} next={next} />, { kind: 'center', locked: true })
 }

@@ -2244,4 +2244,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'धीमी, हेडफ़ोन या शांत कमरे के लिए।',
   'Dynamic': 'डायनामिक',
   'Red to green as you get through today’s sets, blue on a rest day.': 'आज के सेट पूरे करते-करते लाल से हरा, आराम के दिन नीला।',
+  'New order': 'नया क्रम',
+  'Supersets changed': 'सुपरसेट बदले',
+  'Saved as “{0}”': '“{0}” के रूप में सेव किया',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'आज का वर्कआउट इस रूटीन से अलग था। अगली बार के लिए बदलाव रखें?',
+  'Save as new routine': 'नए रूटीन के रूप में सेव करें',
+  'Keep as is': 'जैसा है वैसा रखें',
+  'Ask to update the routine': 'रूटीन अपडेट करने के लिए पूछें',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'जब आप ऐसा वर्कआउट पूरा करें जिसके एक्सरसाइज़, क्रम या सुपरसेट उसके रूटीन से अलग हों।',
 }

@@ -2255,4 +2255,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'เบา ๆ สำหรับหูฟังหรือห้องที่เงียบ',
   'Dynamic': 'ไดนามิก',
   'Red to green as you get through today’s sets, blue on a rest day.': 'จากแดงเป็นเขียวเมื่อคุณทำเซ็ตของวันนี้ไปเรื่อย ๆ และเป็นสีฟ้าในวันพัก',
+  'New order': 'ลำดับใหม่',
+  'Supersets changed': 'ซูเปอร์เซ็ตเปลี่ยนไป',
+  'Saved as “{0}”': 'บันทึกเป็น “{0}” แล้ว',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'การออกกำลังกายวันนี้ต่างจากรูทีนนี้ เก็บการเปลี่ยนแปลงไว้ใช้ครั้งหน้าไหม?',
+  'Save as new routine': 'บันทึกเป็นรูทีนใหม่',
+  'Keep as is': 'คงไว้ตามเดิม',
+  'Ask to update the routine': 'ถามเพื่ออัปเดตรูทีน',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'เมื่อคุณจบการออกกำลังกายที่ท่า ลำดับ หรือซูเปอร์เซ็ตต่างจากรูทีนของมัน',
 }

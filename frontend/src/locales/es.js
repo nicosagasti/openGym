@@ -2244,4 +2244,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'Suave, para auriculares o una sala tranquila.',
   'Dynamic': 'Dinámico',
   'Red to green as you get through today’s sets, blue on a rest day.': 'De rojo a verde a medida que completas las series de hoy; azul en día de descanso.',
+  'New order': 'Nuevo orden',
+  'Supersets changed': 'Superseries cambiadas',
+  'Saved as “{0}”': 'Guardada como “{0}”',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'El entrenamiento de hoy fue distinto a esta rutina. ¿Guardar los cambios para la próxima vez?',
+  'Save as new routine': 'Guardar como rutina nueva',
+  'Keep as is': 'Dejar como está',
+  'Ask to update the routine': 'Preguntar si actualizar la rutina',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Al terminar un entrenamiento cuyos ejercicios, orden o superseries difieren de su rutina.',
 }

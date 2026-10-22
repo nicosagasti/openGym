@@ -2244,4 +2244,12 @@ export default {
   'Gentle, for headphones or a quiet room.': 'Sakin, kulaklık ya da sessiz bir oda için.',
   'Dynamic': 'Dinamik',
   'Red to green as you get through today’s sets, blue on a rest day.': 'Bugünün setlerini tamamladıkça kırmızıdan yeşile, dinlenme gününde mavi.',
+  'New order': 'Yeni sıra',
+  'Supersets changed': 'Süper setler değişti',
+  'Saved as “{0}”': '“{0}” olarak kaydedildi',
+  'Today’s workout was different from this routine. Keep the changes for next time?': 'Bugünkü antrenman bu rutinden farklıydı. Değişiklikleri bir dahaki sefere saklayalım mı?',
+  'Save as new routine': 'Yeni rutin olarak kaydet',
+  'Keep as is': 'Olduğu gibi bırak',
+  'Ask to update the routine': 'Rutini güncellemeyi sor',
+  'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Hareketleri, sırası veya süper setleri rutininden farklı bir antrenmanı bitirdiğinde.',
 }
