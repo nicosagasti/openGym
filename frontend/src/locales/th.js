@@ -2263,4 +2263,7 @@ export default {
   'Keep as is': 'คงไว้ตามเดิม',
   'Ask to update the routine': 'ถามเพื่ออัปเดตรูทีน',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'เมื่อคุณจบการออกกำลังกายที่ท่า ลำดับ หรือซูเปอร์เซ็ตต่างจากรูทีนของมัน',
+  'Not trained yet': 'ยังไม่ได้ฝึก',
+  'From your first color to your second as you get through today’s sets.': 'จากสีแรกไปสีที่สองเมื่อคุณทำเซ็ตของวันนี้ไปเรื่อย ๆ',
+  'Pick the color for “{0}”': 'เลือกสีสำหรับ “{0}”',
 }

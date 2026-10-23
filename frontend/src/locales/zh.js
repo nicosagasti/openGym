@@ -2252,4 +2252,7 @@ export default {
   'Keep as is': '保持不变',
   'Ask to update the routine': '询问是否更新训练日',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': '当你完成的训练在动作、顺序或超级组上与训练日不同时。',
+  'Not trained yet': '尚未训练',
+  'From your first color to your second as you get through today’s sets.': '随着完成今天的组数，从你的第一种颜色变到第二种。',
+  'Pick the color for “{0}”': '选择“{0}”的颜色',
 }

@@ -2252,4 +2252,7 @@ export default {
   'Keep as is': 'Olduğu gibi bırak',
   'Ask to update the routine': 'Rutini güncellemeyi sor',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Hareketleri, sırası veya süper setleri rutininden farklı bir antrenmanı bitirdiğinde.',
+  'Not trained yet': 'Henüz antrenman yok',
+  'From your first color to your second as you get through today’s sets.': 'Bugünün setlerini tamamladıkça ilk renginden ikincisine.',
+  'Pick the color for “{0}”': '“{0}” için renk seç',
 }

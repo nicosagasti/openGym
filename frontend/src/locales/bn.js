@@ -2331,4 +2331,7 @@ export default {
   'Keep as is': 'যেমন আছে রাখুন',
   'Ask to update the routine': 'রুটিন আপডেটের কথা জিজ্ঞাসা করুন',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'যখন এমন ওয়ার্কআউট শেষ করেন যার ব্যায়াম, ক্রম বা সুপারসেট তার রুটিন থেকে আলাদা।',
+  'Not trained yet': 'এখনও ট্রেনিং হয়নি',
+  'From your first color to your second as you get through today’s sets.': 'আজকের সেটগুলো শেষ করার সাথে সাথে আপনার প্রথম রং থেকে দ্বিতীয় রঙে।',
+  'Pick the color for “{0}”': '“{0}”-এর রং বেছে নিন',
 }

@@ -45,6 +45,14 @@ export function sanitizeAccent(s) {
     if (hex) s.accentCustom = hex; else delete s.accentCustom
   }
   if ('accent' in s && !(typeof s.accent === 'string' && KEY.test(s.accent))) s.accent = DEFAULT_ACCENT
+  // The dynamic accent's own colours (lib/dynamic-accent.js): only start, end and rest, each a
+  // plain hex; the key goes when none is left.
+  if ('dynamicColors' in s) {
+    const own = s.dynamicColors && typeof s.dynamicColors === 'object' ? s.dynamicColors : {}
+    const kept = {}
+    for (const k of ['start', 'end', 'rest']) { const hex = cleanHex(own[k]); if (hex) kept[k] = hex }
+    if (Object.keys(kept).length) s.dynamicColors = kept; else delete s.dynamicColors
+  }
   return s
 }
 

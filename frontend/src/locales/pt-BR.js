@@ -1413,6 +1413,9 @@ export const PT_BR_OVERRIDES = {
   'Keep as is': 'Deixar como está',
   'Ask to update the routine': 'Perguntar se deve atualizar a rotina',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Ao terminar um treino cujos exercícios, ordem ou superséries diferem da rotina.',
+  'Not trained yet': 'Ainda sem treinar',
+  'From your first color to your second as you get through today’s sets.': 'Da sua primeira cor à segunda conforme você completa as séries de hoje.',
+  'Pick the color for “{0}”': 'Escolher a cor de “{0}”',
 }
 
 export default { ...pt, ...PT_BR_OVERRIDES }

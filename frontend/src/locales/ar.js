@@ -2307,4 +2307,7 @@ export default {
   'Keep as is': 'إبقاؤه كما هو',
   'Ask to update the routine': 'اسأل لتحديث الروتين',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'عند إنهاء تمرين تختلف تمارينه أو ترتيبه أو مجموعاته الفائقة عن روتينه.',
+  'Not trained yet': 'لم تتمرن بعد',
+  'From your first color to your second as you get through today’s sets.': 'من لونك الأول إلى الثاني كلما أنهيت مجموعات اليوم.',
+  'Pick the color for “{0}”': 'اختر لون “{0}”',
 }

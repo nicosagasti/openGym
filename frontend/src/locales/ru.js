@@ -2256,4 +2256,7 @@ export default {
   'Keep as is': 'Оставить как есть',
   'Ask to update the routine': 'Спрашивать об обновлении программы',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Когда вы завершаете тренировку, упражнения, порядок или суперсеты которой отличаются от программы.',
+  'Not trained yet': 'Ещё без тренировки',
+  'From your first color to your second as you get through today’s sets.': 'От вашего первого цвета ко второму по мере выполнения сегодняшних подходов.',
+  'Pick the color for “{0}”': 'Выбрать цвет для «{0}»',
 }

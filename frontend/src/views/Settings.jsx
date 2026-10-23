@@ -31,7 +31,7 @@ import { getMediaStatus, subscribeMediaStatus, pendingRefCount } from '../lib/me
 import { limitsFrom, fmtMB, MB } from '../lib/media-limits.js'
 import { setRestAccent } from '../lib/rest-alert.js'
 import { CUSTOM, DYNAMIC, accentKey, adjustedIn, applyAccent, cleanHex, inkOn, isGrey } from '../lib/accent.js'
-import { liveAccentValue } from '../lib/dynamic-accent.js'
+import { liveAccentValue, dynamicStops, restColorOf } from '../lib/dynamic-accent.js'
 import { checkForUpdate, downloadAndInstall, fetchChecksum, RELEASES_PAGE } from '../lib/update.js'
 import { forgetCoach } from '../lib/coach-api.js'
 import { REST_MAX, REST_PAUSE_MIN, REST_PAUSE_MAX, fmtRest, fmtDuration } from '../lib/duration.js'
@@ -1222,6 +1222,8 @@ function AccentSwatches({ S, update }) {
   const own = cleanHex(S.accentCustom)
   const onCustom = key === CUSTOM
   const pickPreset = k => { update(s => { s.accent = k }); setRestAccent(k) }
+  const dynStops = dynamicStops(S)
+  const ownDyn = !!(S.dynamicColors && (S.dynamicColors.start || S.dynamicColors.end || S.dynamicColors.rest))
   const pickDynamic = () => { update(s => { s.accent = DYNAMIC }); setRestAccent(liveAccentValue({ ...S, accent: DYNAMIC })) }
   const pickOwn = hex => {
     const c = cleanHex(hex)
@@ -1278,8 +1280,11 @@ function AccentSwatches({ S, update }) {
         <button key={k} className={'swatch' + (key === k ? ' on' : '')}
           style={{ background: c }} onClick={() => pickPreset(k)} aria-label={t(ACCENT_NAMES[k] || k)} />
       ))}
+      {/* The ramp it walks, start to end, so a colour of the user's own shows here too; the line
+          inside sets it apart from the own-colour swatch beside it, which is also many-coloured. */}
       <button className={'swatch swatch-dynamic' + (key === DYNAMIC ? ' on' : '')}
-        onClick={pickDynamic} aria-label={t('Dynamic')} />
+        style={{ background: 'linear-gradient(135deg,' + dynStops.join(',') + ')', color: inkOn(dynStops[Math.floor(dynStops.length / 2)]) }}
+        onClick={pickDynamic} aria-label={t('Dynamic')}><Icon name="chartLine" /></button>
       {!hasInput
         ? <button className="swatch swatch-own" style={{ background: own }} onClick={() => pickOwn(own)} aria-label={ownLabel} />
         : <span className={'swatch swatch-own' + (own ? ' on' : ' unset')} style={own ? { background: own, color: inkOn(own) } : undefined}>
@@ -1289,9 +1294,53 @@ function AccentSwatches({ S, update }) {
             aria-label={own ? t('Change your own color') : t('Pick your own color')} />
         </span>}
     </div>
-    {key === DYNAMIC && <span className="lrow-s swatch-note" style={{ flexBasis: '100%', paddingInlineStart: 41 }}>{t('Red to green as you get through today’s sets, blue on a rest day.')}</span>}
+    {key === DYNAMIC && <span className="lrow-s swatch-note" style={{ flexBasis: '100%', paddingInlineStart: 41 }}>{ownDyn
+      ? t('From your first color to your second as you get through today’s sets.')
+      : t('Red to green as you get through today’s sets, blue on a rest day.')}</span>}
+    {key === DYNAMIC && <DynamicColors S={S} update={update} />}
     {notes.map(n => <span key={n} className="lrow-s swatch-note" style={{ flexBasis: '100%', paddingInlineStart: 41 }}>{n}</span>)}
   </>
+}
+
+// The dynamic accent's three colours (lib/dynamic-accent.js): where the day starts, where a
+// finished workout lands, and a rest day. Each is a swatch with the system colour picker laid over
+// it, as the own-colour swatch is. A colour is saved once the picker rests (a drag sends one per
+// step) or when Settings closes, and Reset puts the built-in ones back.
+function DynamicColors({ S, update }) {
+  const stops = dynamicStops(S)
+  const now = { start: stops[0], end: stops.at(-1), rest: restColorOf(S) }
+  const own = S.dynamicColors || {}
+  const save = (k, hex) => {
+    const c = cleanHex(hex)
+    if (!c || c === cleanHex(own[k])) return
+    update(s => { s.dynamicColors = { ...(s.dynamicColors || {}), [k]: c } })
+    setRestAccent(liveAccentValue(useStore.getState().S))
+  }
+  const reset = () => {
+    update(s => { delete s.dynamicColors })
+    setRestAccent(liveAccentValue(useStore.getState().S))
+  }
+  const rows = [['start', t('Not trained yet')], ['end', t('Workout done')], ['rest', t('Rest day')]]
+  return <div className="dyn-colors" style={{ flexBasis: '100%', paddingInlineStart: 41 }}>
+    {rows.map(([k, label]) => <DynamicColorDot key={k + now[k]} value={now[k]} label={label} onPick={hex => save(k, hex)} />)}
+    {(own.start || own.end || own.rest) && <Button size="xs" variant="ghost" onClick={reset}>{t('Reset')}</Button>}
+  </div>
+}
+function DynamicColorDot({ value, label, onPick }) {
+  const timer = useRef(0)
+  const pending = useRef(null)
+  const pick = useRef(onPick)
+  pick.current = onPick
+  const commit = () => { clearTimeout(timer.current); const c = pending.current; pending.current = null; if (c) pick.current(c) }
+  useEffect(() => commit, []) // eslint-disable-line react-hooks/exhaustive-deps
+  return <label className="dyn-color">
+    <span className="swatch" style={{ background: value }}>
+      <input type="color" className="swatch-input" defaultValue={value} aria-label={t('Pick the color for “{0}”', label)}
+        onChange={e => { pending.current = e.target.value; clearTimeout(timer.current); timer.current = setTimeout(commit, OWN_COLOR_SETTLE_MS) }}
+        onBlur={commit} />
+    </span>
+    <span className="small muted">{label}</span>
+  </label>
 }
 
 function EquipmentCard({ S, update }) {

@@ -2252,4 +2252,7 @@ export default {
   'Keep as is': '그대로 두기',
   'Ask to update the routine': '루틴 업데이트 여부 묻기',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': '운동의 종목, 순서 또는 슈퍼세트가 루틴과 다를 때 운동을 마치면.',
+  'Not trained yet': '아직 운동 전',
+  'From your first color to your second as you get through today’s sets.': '오늘의 세트를 진행할수록 첫 번째 색에서 두 번째 색으로.',
+  'Pick the color for “{0}”': '“{0}” 색상 선택',
 }

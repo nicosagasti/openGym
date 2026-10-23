@@ -2245,4 +2245,7 @@ export default {
   'Keep as is': '保持原樣',
   'Ask to update the routine': '詢問是否更新課表',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': '當你完成的訓練在動作、順序或超級組上與課表不同時。',
+  'Not trained yet': '尚未訓練',
+  'From your first color to your second as you get through today’s sets.': '隨著完成今天的組數，從你的第一個顏色變到第二個。',
+  'Pick the color for “{0}”': '選擇「{0}」的顏色',
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DYNAMIC_STOPS, REST_COLOR, progressColor, sessionProgress, dynamicAccent, liveAccentValue } from './dynamic-accent.js'
+import { DYNAMIC_STOPS, REST_COLOR, progressColor, sessionProgress, dynamicAccent, liveAccentValue, dynamicStops, restColorOf, hueRamp } from './dynamic-accent.js'
 import { accentKey, accentValue, sanitizeAccent, DYNAMIC } from './accent.js'
 
 const ISO = '2026-08-19'   // a Wednesday → getDay() 3
@@ -82,5 +82,80 @@ describe('the dynamic choice in accent.js', () => {
   })
   it('survives sanitizing', () => {
     expect(sanitizeAccent({ accent: DYNAMIC }).accent).toBe(DYNAMIC)
+  })
+})
+
+// The user's own colours (Settings → Accent color → Dynamic): S.dynamicColors = { start, end, rest }.
+const hueOf = hex => {
+  const [r, g, b] = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), d = max - min
+  if (!d) return 0
+  const h = max === r ? ((g - b) / d) % 6 : max === g ? (b - r) / d + 2 : (r - g) / d + 4
+  return (h * 60 + 360) % 360
+}
+
+describe('dynamicStops', () => {
+  it('is the built-in ramp when no colour of the user’s own is set', () => {
+    expect(dynamicStops({})).toEqual(DYNAMIC_STOPS)
+    expect(dynamicStops({ dynamicColors: {} })).toEqual(DYNAMIC_STOPS)
+    expect(dynamicStops({ dynamicColors: { rest: '#123456' } })).toEqual(DYNAMIC_STOPS)
+  })
+  it('runs from the user’s start to their end, same number of stops', () => {
+    const stops = dynamicStops({ dynamicColors: { start: '#8a2be2', end: '#00bfff' } })
+    expect(stops).toHaveLength(DYNAMIC_STOPS.length)
+    expect(stops[0]).toBe('#8a2be2')
+    expect(stops.at(-1)).toBe('#00bfff')
+  })
+  it('keeps the built-in colour for the one end the user left alone', () => {
+    expect(dynamicStops({ dynamicColors: { start: '#8a2be2' } }).at(-1)).toBe(DYNAMIC_STOPS.at(-1))
+    expect(dynamicStops({ dynamicColors: { end: '#00bfff' } })[0]).toBe(DYNAMIC_STOPS[0])
+  })
+  it('ignores anything that is not a plain #rrggbb', () => {
+    expect(dynamicStops({ dynamicColors: { start: 'red', end: 'url(x)' } })).toEqual(DYNAMIC_STOPS)
+  })
+})
+
+describe('hueRamp', () => {
+  it('goes round the colour wheel the short way, so red to green passes through yellow, not brown', () => {
+    const mid = hueRamp('#ff0000', '#00ff00', 5)[2]
+    expect(hueOf(mid)).toBeGreaterThan(45)
+    expect(hueOf(mid)).toBeLessThan(75)
+    // Bright, not muddy: the middle keeps the ends' saturation.
+    const [r, g, b] = [1, 3, 5].map(i => parseInt(mid.slice(i, i + 2), 16))
+    expect(Math.max(r, g, b) - Math.min(r, g, b)).toBeGreaterThan(200)
+  })
+  it('crosses 0° when that is shorter (magenta to orange through red)', () => {
+    const mid = hueRamp('#ff00ff', '#ff8000', 3)[1]
+    const h = hueOf(mid)
+    expect(h > 330 || h < 10).toBe(true)
+  })
+  it('a grey end takes the other end’s hue instead of swinging through red', () => {
+    const ramp = hueRamp('#808080', '#0000ff', 5)
+    for (const c of ramp.slice(1)) expect(Math.abs(hueOf(c) - 240)).toBeLessThan(1)
+  })
+})
+
+describe('the user’s colours in dynamicAccent', () => {
+  const own = { start: '#8a2be2', end: '#00bfff', rest: '#ff69b4' }
+  it('not trained yet is their start, done is their end, rest is their rest', () => {
+    expect(dynamicAccent(state({ dynamicColors: own }), ISO)).toBe(own.start)
+    expect(dynamicAccent(state({ dynamicColors: own, workouts: [{ d: ISO, entries: [] }] }), ISO)).toBe(own.end)
+    expect(dynamicAccent(state({ dynamicColors: own, week: {} }), ISO)).toBe(own.rest)
+  })
+  it('a session in progress walks their ramp', () => {
+    const stops = dynamicStops({ dynamicColors: own })
+    expect(dynamicAccent(state({ dynamicColors: own, active: session(2, 4) }), ISO)).toBe(progressColor(0.5, stops))
+  })
+  it('rest falls back to the built-in blue when theirs is unset or malformed', () => {
+    expect(restColorOf({ dynamicColors: { rest: 'blue' } })).toBe(REST_COLOR)
+    expect(restColorOf({})).toBe(REST_COLOR)
+  })
+})
+
+describe('sanitizeAccent and dynamicColors', () => {
+  it('keeps the valid colours in lowercase and drops the rest, and the key when nothing is left', () => {
+    expect(sanitizeAccent({ dynamicColors: { start: '#8A2BE2', end: 'nope', rest: 5, extra: '#000000' } }).dynamicColors).toEqual({ start: '#8a2be2' })
+    expect('dynamicColors' in sanitizeAccent({ dynamicColors: { start: 'x' } })).toBe(false)
+    expect('dynamicColors' in sanitizeAccent({ dynamicColors: 'red' })).toBe(false)
   })
 })

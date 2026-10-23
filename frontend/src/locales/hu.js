@@ -2255,4 +2255,7 @@ export default {
   'Keep as is': 'Maradjon így',
   'Ask to update the routine': 'Kérdezzen rá a rutin frissítésére',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Ha olyan edzést fejezel be, amelynek gyakorlatai, sorrendje vagy szuperszettjei eltérnek a rutinjától.',
+  'Not trained yet': 'Még nem edzettél',
+  'From your first color to your second as you get through today’s sets.': 'Az első színedtől a másodikig, ahogy haladsz a mai sorozatokkal.',
+  'Pick the color for “{0}”': 'Szín választása ehhez: „{0}”',
 }

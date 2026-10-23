@@ -2272,4 +2272,7 @@ export default {
   'Keep as is': 'So lassen',
   'Ask to update the routine': 'Fragen, ob die Routine aktualisiert werden soll',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'Wenn du ein Training beendest, dessen Übungen, Reihenfolge oder Supersätze von seiner Routine abweichen.',
+  'Not trained yet': 'Noch nicht trainiert',
+  'From your first color to your second as you get through today’s sets.': 'Von deiner ersten zu deiner zweiten Farbe, während du die heutigen Sätze abschließt.',
+  'Pick the color for “{0}”': 'Farbe für „{0}“ wählen',
 }

@@ -2252,4 +2252,7 @@ export default {
   'Keep as is': 'जैसा है वैसा रखें',
   'Ask to update the routine': 'रूटीन अपडेट करने के लिए पूछें',
   'When you finish a workout whose exercises, order or supersets differ from its routine.': 'जब आप ऐसा वर्कआउट पूरा करें जिसके एक्सरसाइज़, क्रम या सुपरसेट उसके रूटीन से अलग हों।',
+  'Not trained yet': 'अभी ट्रेनिंग नहीं हुई',
+  'From your first color to your second as you get through today’s sets.': 'आज के सेट पूरे करते-करते आपके पहले रंग से दूसरे रंग तक।',
+  'Pick the color for “{0}”': '“{0}” का रंग चुनें',
 }
