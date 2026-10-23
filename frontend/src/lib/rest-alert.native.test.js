@@ -38,6 +38,12 @@ vi.mock('@capacitor/local-notifications', () => ({
   },
 }))
 
+// Each test imports rest-alert.js afresh (vi.resetModules), and its import graph reaches
+// lib/history.js. With the whole suite running at once that import alone can pass the 5 s default,
+// and the test that timed out then goes on in the background and registers the plugin a second
+// time inside the next one ("called 2 times"). The tests themselves take milliseconds.
+vi.setConfig({ testTimeout: 30_000 })
+
 const settle = async () => { for (let i = 0; i < 10; i++) await new Promise(r => setTimeout(r, 0)) }
 
 const unhandled = []
