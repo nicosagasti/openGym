@@ -128,3 +128,36 @@ describe('applySessionToRoutine / saveSessionAsNewRoutine', () => {
     expect(s.week).toEqual({ 1: ['r1'] })
   })
 })
+
+// A slot's planned backups (lib/routine-backups.js `subs`): using one is the plan working.
+describe('backups', () => {
+  const r = () => routine([slot(BENCH), slot(FLY, { subs: [DIP, TRI] }), slot(OHP)])
+  it('a swap to one of the slot’s backups is not a change', () => {
+    expect(routineDiff(r(), [entry(BENCH, 'r1'), entry(DIP, 'r1'), entry(OHP, 'r1')])).toBe(null)
+  })
+  it('a swap to something else still is, and its slot’s backups pass to the new exercise', () => {
+    const d = routineDiff(r(), [entry(BENCH, 'r1'), entry('0405x', 'r1'), entry(OHP, 'r1')])
+    expect(d.swap).toEqual([{ from: FLY, to: '0405x' }])
+  })
+  it('Update with a backup used keeps the slot as it was, backups and all', () => {
+    const ex = buildRoutineEx(r(), [entry(BENCH, 'r1'), entry(DIP, 'r1'), entry(OHP, 'r1', { target: { restSec: 200 } })])
+    expect(ex.map(x => x.id)).toEqual([BENCH, FLY, OHP])
+    expect(ex[1].subs).toEqual([DIP, TRI])
+  })
+  it('a backup used and moved first reads as its slot moved: a new order, nothing else', () => {
+    const d = routineDiff(r(), [entry(DIP, 'r1'), entry(BENCH, 'r1'), entry(OHP, 'r1')])
+    expect(d).toMatchObject({ add: [], remove: [], swap: [], order: true, supersets: false, setup: [] })
+    // Update keeps the slot itself, in its new place.
+    expect(buildRoutineEx(r(), [entry(DIP, 'r1'), entry(BENCH, 'r1'), entry(OHP, 'r1')]).map(x => x.id)).toEqual([FLY, BENCH, OHP])
+  })
+  it('a swap for good hands the old slot’s backups to the new exercise, less itself', () => {
+    const ex = buildRoutineEx(routine([slot(BENCH), slot(FLY, { subs: [DIP, TRI] })]), [entry(BENCH, 'r1'), entry(TRI + 'x', 'r1')])
+    expect(ex[1].subs).toEqual([DIP, TRI])
+    const ex2 = buildRoutineEx(routine([slot(BENCH), slot(FLY, { subs: [DIP] })]), [entry(BENCH, 'r1'), entry(OHP, 'r1')])
+    expect(ex2[1].subs).toEqual([DIP])
+  })
+  it('a plain addition carries no backups', () => {
+    const ex = buildRoutineEx(routine([slot(BENCH)]), [entry(BENCH, 'r1'), entry(DIP, 'r1', { target: { subs: [TRI] } })])
+    expect(ex[1].subs).toBeUndefined()
+  })
+})
